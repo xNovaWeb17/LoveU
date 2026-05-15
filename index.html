@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuvU</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #BD8AFF; /* พื้นหลังสีม่วงอ่อน */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #ffffff;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        .btn-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            height: 150px; /* ล็อกความสูงไว้ไม่ให้ปุ่มเบียดกันเวลาเล็กลง */
+        }
+        .btn {
+            padding: 15px 35px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.2s ease; /* ทำให้ปุ่มย่อ-ขยายแบบนุ่มนวล */
+        }
+        /* ปุ่มซ้าย (ไปต่อ) */
+        #leftBtn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        #leftBtn:hover {
+            background-color: #10ff28;
+            transform: scale(1.1); /* ขยายใหญ่นิดนึงตอนชี้ */
+        }
+        /* ปุ่มขวา (เล็กลงเรื่อยๆ) */
+        #rightBtn {
+            background-color: #ff0000;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>วันนี้รักกันมั้ย? 🥺</h1>
+
+    <div class="btn-container">
+        <button id="leftBtn" class="btn" onclick="goNext()">รักที่สุดดด❤️</button>
+        
+        <button id="rightBtn" class="btn" onclick="shrinkMe()">ไม่บอกก!</button>
+    </div>
+
+    <script>
+        // กำหนดขนาดเริ่มต้นของปุ่มขวาเป็น 1.0 (100%)
+        let currentScale = 1.0; 
+
+        // ฟังก์ชันเมื่อกดปุ่มซ้าย: ให้เปลี่ยนหน้าเว็บไปที่ next.html
+        function goNext() {
+            window.location.href = 'next.html';
+        }
+
+        // ฟังก์ชันเมื่อกดปุ่มขวา: ให้ปุ่มเล็กลงเรื่อยๆ
+        function shrinkMe() {
+            // ทุกครั้งที่กด จะลดขนาดลงทีละ 0.15 (15%)
+            currentScale -= 0.15; 
+            
+            // ป้องกันไม่ให้ปุ่มติดลบจนหายไปเลย (ล็อกให้เหลือเล็กสุดที่ 10%)
+            if (currentScale < 0.1) {
+                currentScale = 0.1;
+                alert('ไปอยู่กับหมอนข้างที่รักของเธอสิ😑');
+            }
+            
+            // สั่งให้ปุ่มขวาย่อขนาดลงตามค่าที่คำนวณ
+            document.getElementById('rightBtn').style.transform = `scale(${currentScale})`;
+        }
+    </script>
+
+</body>
+</html>
